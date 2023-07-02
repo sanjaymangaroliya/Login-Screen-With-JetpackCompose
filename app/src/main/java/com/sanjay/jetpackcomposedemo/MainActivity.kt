@@ -48,9 +48,7 @@ class MainActivity : ComponentActivity() {
     @OptIn(ExperimentalMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-
-        var passwordFocus = false
+        
         setContent {
             Column(
                 modifier = Modifier
@@ -62,48 +60,48 @@ class MainActivity : ComponentActivity() {
 
                 Spacer(modifier = Modifier.height(100.dp))
 
-                var eyeIconLiked by remember { mutableStateOf(0) }
+                var emailLength by remember { mutableStateOf(0) }
 
                 //MARK: Image
                 Image(
                     painter = painterResource(
-                        id = if (eyeIconLiked == 200) {
+                        id = if (emailLength == 200) {
                             R.drawable.shy
-                        } else if (eyeIconLiked <= 0) {
+                        } else if (emailLength <= 0) {
                             R.drawable.neutral
-                        } else if (eyeIconLiked == 1) {
+                        } else if (emailLength == 1) {
                             R.drawable.frame_1
-                        } else if (eyeIconLiked == 2) {
+                        } else if (emailLength == 2) {
                             R.drawable.frame_2
-                        } else if (eyeIconLiked == 3) {
+                        } else if (emailLength == 3) {
                             R.drawable.frame_3
-                        } else if (eyeIconLiked == 4) {
+                        } else if (emailLength == 4) {
                             R.drawable.frame_4
-                        } else if (eyeIconLiked == 5) {
+                        } else if (emailLength == 5) {
                             R.drawable.frame_5
-                        } else if (eyeIconLiked == 6) {
+                        } else if (emailLength == 6) {
                             R.drawable.frame_6
-                        } else if (eyeIconLiked == 7) {
+                        } else if (emailLength == 7) {
                             R.drawable.frame_7
-                        } else if (eyeIconLiked == 8) {
+                        } else if (emailLength == 8) {
                             R.drawable.frame_8
-                        } else if (eyeIconLiked == 9) {
+                        } else if (emailLength == 9) {
                             R.drawable.frame_9
-                        } else if (eyeIconLiked == 10) {
+                        } else if (emailLength == 10) {
                             R.drawable.frame_10
-                        } else if (eyeIconLiked == 11) {
+                        } else if (emailLength == 11) {
                             R.drawable.frame_11
-                        } else if (eyeIconLiked == 12) {
+                        } else if (emailLength == 12) {
                             R.drawable.frame_12
-                        } else if (eyeIconLiked == 13) {
+                        } else if (emailLength == 13) {
                             R.drawable.frame_13
-                        } else if (eyeIconLiked == 14) {
+                        } else if (emailLength == 14) {
                             R.drawable.frame_14
-                        } else if (eyeIconLiked == 15) {
+                        } else if (emailLength == 15) {
                             R.drawable.frame_15
-                        } else if (eyeIconLiked == 16) {
+                        } else if (emailLength == 16) {
                             R.drawable.frame_16
-                        } else if (eyeIconLiked >= 17) {
+                        } else if (emailLength >= 17) {
                             R.drawable.frame_17
                         } else {
                             R.drawable.neutral
@@ -118,7 +116,8 @@ class MainActivity : ComponentActivity() {
                 val email = remember { mutableStateOf(TextFieldValue()) }
                 val password = remember { mutableStateOf(TextFieldValue()) }
                 var passwordVisible by rememberSaveable { mutableStateOf(false) }
-
+                var passwordFocus = false
+                
                 Spacer(modifier = Modifier.height(20.dp))
 
                 //MARK: Email
@@ -129,7 +128,7 @@ class MainActivity : ComponentActivity() {
                         .onFocusChanged {
                             if (it.isFocused) {
                                 //passwordFocus = false
-                                eyeIconLiked = 1
+                                emailLength = 1
                             }
                         },
                     label = { Text(text = getString(R.string.email), fontSize = 16.sp) },
@@ -144,7 +143,7 @@ class MainActivity : ComponentActivity() {
                     ),
                     onValueChange = {
                         email.value = it
-                        eyeIconLiked = it.text.length
+                        emailLength = it.text.length
                     },
                 )
 
@@ -156,7 +155,7 @@ class MainActivity : ComponentActivity() {
                         .onFocusChanged {
                             if (it.isFocused) {
                                 passwordFocus = true
-                                eyeIconLiked = 200
+                                emailLength = 200
                             }
                         },
                     label = { Text(text = getString(R.string.password)) },
@@ -181,7 +180,7 @@ class MainActivity : ComponentActivity() {
                             description = "Hide password"
                             if (!passwordFocus) {
                                 passwordFocus = true
-                                eyeIconLiked = 0
+                                emailLength = 0
                             }
 
                         } else {
@@ -189,7 +188,7 @@ class MainActivity : ComponentActivity() {
                             description = "Show password"
                             if (passwordFocus) {
                                 passwordFocus = false
-                                eyeIconLiked = 200
+                                emailLength = 200
                             }
                         }
                         IconButton(onClick = { passwordVisible = !passwordVisible }) {
